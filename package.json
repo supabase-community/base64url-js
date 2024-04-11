@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "base64url",
+  "version": "1.0.0",
+  "description": "Pure native JavaScript base64url encoder/decoder with full UTF-8 support.",
+  "main": "b64.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/supabase/base64url"
+  },
+  "keywords": [
+    "base64",
+    "base64url",
+    "javascript",
+    "typescript",
+    "pure"
+  ],
+  "author": "Stojan Dimitrovski",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.4.4",
+    "vitest": "^1.4.0"
+  }
+}
