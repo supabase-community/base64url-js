@@ -3,9 +3,12 @@
   "name": "base64url",
   "version": "1.0.0",
   "description": "Pure native JavaScript base64url encoder/decoder with full UTF-8 support.",
+  "type": "module",
   "main": "b64.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run --coverage",
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,13 @@
   "author": "Stojan Dimitrovski",
   "license": "MIT",
   "dependencies": {
-    "typescript": "^5.4.4",
     "vitest": "^1.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0"
   }
 }

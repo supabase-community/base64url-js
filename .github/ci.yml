@@ -1,0 +1,29 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-build-test:
+    name: Lint, build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+
+      - run: |
+          npm ci
+
+      - run: |
+          npm lint
+
+      - run: |
+          npm build
+
+      - run: |
+          npm test
