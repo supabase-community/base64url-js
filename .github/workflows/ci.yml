@@ -20,10 +20,10 @@ jobs:
           npm ci
 
       - run: |
-          npm lint
+          npm run lint
 
       - run: |
-          npm build
+          npm run build
 
       - run: |
-          npm test
+          npm run test
