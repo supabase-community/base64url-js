@@ -3,6 +3,7 @@ import {
   stringToBase64URL,
   stringFromBase64URL,
   stringFromUTF8,
+  codepointToUTF8,
 } from "./base64url";
 
 const EXAMPLES = [
@@ -13,6 +14,7 @@ const EXAMPLES = [
   "hello world",
   "нешто на кирилица",
   "something with emojis 🤙🏾 ",
+  "Supabaseは、オープンソースの Firebase 代替製品です。エンタープライズグレードのオープンソースツールを使って、Firebase の機能を構築しています。",
 ];
 
 describe("stringToBase64URL", () => {
@@ -29,9 +31,17 @@ describe("stringFromBase64URL", () => {
   EXAMPLES.forEach((example) => {
     test(`decode "${example}"`, () => {
       expect(
-        stringFromBase64URL(Buffer.from(example).toString("base64url")),
+        stringFromBase64URL(
+          "\r\t\n " + Buffer.from(example).toString("base64url"),
+        ),
       ).toEqual(example);
     });
+  });
+
+  test("decode with invalid Base64-URL character", () => {
+    expect(() => {
+      stringFromBase64URL("*");
+    }).toThrow(new Error(`Invalid Base64-URL character "*" at position 0`));
   });
 });
 
@@ -50,10 +60,24 @@ describe("stringFromUTF8", () => {
       expect(() => {
         const state = { utf8seq: 0, codepoint: 0 };
         example.forEach((byte) => {
-          console.log("byte ", byte);
           stringFromUTF8(byte, state, () => {});
         });
       }).toThrow(new Error("Invalid UTF-8 sequence"));
     });
+  });
+});
+
+describe("codepointToUTF8", () => {
+  test("invalid codepoints above 0x10ffff", () => {
+    const invalidCodepoint = 0x10ffff + 1;
+    expect(() => {
+      codepointToUTF8(invalidCodepoint, () => {
+        throw new Error("Should not becalled");
+      });
+    }).toThrow(
+      new Error(
+        `Unrecognized Unicode codepoint: ${invalidCodepoint.toString(16)}`,
+      ),
+    );
   });
 });

@@ -1,6 +1,7 @@
 /**
- * Avoid modifying this file. It's part of https://github.com/supabase/base64url.
- * Submit all fixes on that repo!
+ * Avoid modifying this file. It's part of
+ * https://github.com/supabase-community/base64url-js.  Submit all fixes on
+ * that repo!
  */
 
 /**
@@ -137,10 +138,6 @@ export function codepointToUTF8(
 ) {
   if (codepoint <= 0x7f) {
     emit(codepoint);
-    return;
-  } else if (codepoint <= 0x7ff) {
-    emit(0xc0 | (codepoint >> 6));
-    emit(0x80 | (codepoint & 0x3f));
     return;
   } else if (codepoint <= 0x7ff) {
     emit(0xc0 | (codepoint >> 6));
